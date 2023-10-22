@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(URLS);
+		System.out.println("テストコメント セキュリティコンフィグ ignoring");
 	}
 
 	/**
@@ -47,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
+		System.out.println("テストコメント セキュリティコンフィグ開始");
 		http.authorizeRequests().antMatchers("/login", "/logout-complete", "/users/new", "/user").permitAll()
 				.anyRequest().authenticated()
 				// ログアウト処理
@@ -57,12 +59,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// form
 				.and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
 				.permitAll();
+		System.out.println("テストコメント セキュリティコンフィグ終了");
 		// @formatter:on
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider);
+		System.out.println("テストコメント セキュリティコンフィグ Authentication");
 	}
 
 	@Bean

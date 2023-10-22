@@ -8,6 +8,7 @@ public class PagesController {
 
     @RequestMapping("/")
     public String index() {
+        System.out.println("テストコメント ページコントローラ /→pages/index");
         return "pages/index";
     }
 }

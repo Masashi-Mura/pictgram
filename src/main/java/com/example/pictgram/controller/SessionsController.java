@@ -10,6 +10,7 @@ public class SessionsController {
 
 	@GetMapping(path = "/login")
 	public String index() {
+		System.out.println("テストコメント セッションコンフィグのGet /login→sessions/new");
 		return "sessions/new";
 	}
 
@@ -18,7 +19,7 @@ public class SessionsController {
 		model.addAttribute("hasMessage", true);
 		model.addAttribute("class", "alert-danger");
 		model.addAttribute("message", "Emailまたはパスワードに誤りがあります。");
-
+		System.out.println("テストコメント セッションコンフィグのGet /login-failure→sessions/new");
 		return "sessions/new";
 	}
 
@@ -27,7 +28,7 @@ public class SessionsController {
 		model.addAttribute("hasMessage", true);
 		model.addAttribute("class", "alert-info");
 		model.addAttribute("message", "ログアウトしました。");
-
+		System.out.println("テストコメント セッションコンフィグのGet /logout-complete→layouts/complete");
 		return "layouts/complete";
 	}
 }

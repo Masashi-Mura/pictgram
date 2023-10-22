@@ -31,6 +31,7 @@ public class UsersController {
 	@GetMapping(path = "/users/new")
 	public String newUser(Model model) {
 		model.addAttribute("form", new UserForm());
+		System.out.println("テストコメント ユーザーコントローラ Get /users/new→users/new");
 		return "users/new";
 	}
 
@@ -50,6 +51,7 @@ public class UsersController {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
 			model.addAttribute("message", "ユーザー登録に失敗しました。");
+			System.out.println("テストコメント ユーザーコントローラ Get /users/new→users/new登録失敗");
 			return "users/new";
 		}
 
@@ -59,7 +61,7 @@ public class UsersController {
 		model.addAttribute("hasMessage", true);
 		model.addAttribute("class", "alert-info");
 		model.addAttribute("message", "ユーザー登録が完了しました。");
-
+		System.out.println("テストコメント ユーザーコントローラ Get /users/new→layouts/complete登録成功");
 		return "layouts/complete";
 	}
 }

@@ -19,8 +19,15 @@ import com.example.pictgram.entity.User.Authority;
 import com.example.pictgram.form.UserForm;
 import com.example.pictgram.repository.UserRepository;
 
+import java.util.Locale;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+
 @Controller
 public class UsersController {
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -35,22 +42,26 @@ public class UsersController {
 		return "users/new";
 	}
 
+	//user登録の動作(フォームデータをuserテーブルにレコード登録)
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String create(@Validated @ModelAttribute("form") UserForm form, BindingResult result, Model model,
-			RedirectAttributes redirAttrs) {
+			RedirectAttributes redirAttrs, Locale locale) {
 		String name = form.getName();
 		String email = form.getEmail();
 		String password = form.getPassword();
 		String passwordConfirmation = form.getPasswordConfirmation();
-
+		
 		if (repository.findByUsername(email) != null) {
-			FieldError fieldError = new FieldError(result.getObjectName(), "email", "その E メールはすでに使用されています。");
+			//メッセージ：そのEメールはすでに使用されています。
+			FieldError fieldError = new FieldError(result.getObjectName(), "email"
+					,messageSource.getMessage("users.create.error.1", new String[] {}, locale));
 			result.addError(fieldError);
 		}
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
-			model.addAttribute("message", "ユーザー登録に失敗しました。");
+			//メッセージ：ユーザ登録に失敗しました。
+			model.addAttribute("message", messageSource.getMessage("users.create.flash.1", new String[] {}, locale));
 			System.out.println("テストコメント ユーザーコントローラ Get /users/new→users/new登録失敗");
 			return "users/new";
 		}

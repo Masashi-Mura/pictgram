@@ -5,9 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.pictgram.entity.Topic;
 
+//テスト用
+import java.util.List;
+
 
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Long> {
 
-	Iterable<Topic> findAllByOrderByUpdatedAtDesc();
+	public List<Topic> findAllByOrderByUpdatedAtDesc();
 }

@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private FormAuthenticationProvider authenticationProvider;
 
-	private static final String[] URLS = { "/css/**", "/images/**", "/scripts/**", "/h2-console/**" };
+	private static final String[] URLS = { "/css/**", "/images/**", "/scripts/**", "/h2-console/**", "/favicon.ico" };
 
 	/**
 	* 認証から除外する
@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		System.out.println("テストコメント セキュリティコンフィグ開始");
+				// antMatchersのURLは認証不要で、それ以外は認証が必要。
 		http.authorizeRequests().antMatchers("/login", "/logout-complete", "/users/new", "/user").permitAll()
 				.anyRequest().authenticated()
 				// ログアウト処理
@@ -57,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true).permitAll().and().csrf()
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 				// form
+				// userがログインしてない場合loginPageにリダイレクトされる
 				.and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
 				.permitAll();
 		System.out.println("テストコメント セキュリティコンフィグ終了");

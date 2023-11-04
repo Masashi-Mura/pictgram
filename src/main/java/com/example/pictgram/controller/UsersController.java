@@ -38,7 +38,7 @@ public class UsersController {
 	@GetMapping(path = "/users/new")
 	public String newUser(Model model) {
 		model.addAttribute("form", new UserForm());
-		System.out.println("テストコメント ユーザーコントローラ Get /users/new→users/new");
+		System.out.println("テストコメント ユーザーコントローラ ユーザ登録画面にUserForm form共有");
 		return "users/new";
 	}
 
@@ -62,7 +62,7 @@ public class UsersController {
 			model.addAttribute("class", "alert-danger");
 			//メッセージ：ユーザ登録に失敗しました。
 			model.addAttribute("message", messageSource.getMessage("users.create.flash.1", new String[] {}, locale));
-			System.out.println("テストコメント ユーザーコントローラ Get /users/new→users/new登録失敗");
+			System.out.println("テストコメント ユーザーコントローラ validateエラー");
 			return "users/new";
 		}
 
@@ -72,7 +72,7 @@ public class UsersController {
 		model.addAttribute("hasMessage", true);
 		model.addAttribute("class", "alert-info");
 		model.addAttribute("message", "ユーザー登録が完了しました。");
-		System.out.println("テストコメント ユーザーコントローラ Get /users/new→layouts/complete登録成功");
+		System.out.println("テストコメント ユーザーコントローラ ユーザ登録完了 layouts/complete表示");
 		return "layouts/complete";
 	}
 }

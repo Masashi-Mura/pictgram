@@ -32,6 +32,7 @@ public class User extends AbstractEntity implements UserDetails, UserInf {
 
     public User() {
         super();
+    	System.out.println("テストコメント　User.java のUser()コンストラクタ：内容はsuper();");
     }
 
     public User(String email, String name, String password, Authority authority) {

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- layouts/common.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
@@ -49,10 +50,12 @@
 			</div>
 		</div>
 	</nav>
+	<!-- layouts/common のlayout:fragment="messages"部が別htmlのlayout:replace="~{layouts/common::messages}に代入される。次行から -->
 	<div id="messages" layout:fragment="messages" th:if="!${#lists.isEmpty(#fields.detailedErrors())}">
 		<ul>
 			<li th:each="error : ${#fields.detailedErrors()}" class="error-message" th:text="${error.message}" />
 		</ul>
+	<!-- layouts/common のlayout:fragment="messages"部はここまで -->
 	</div>
 </body>
 

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- layouts/layout.html -->
 <html lang="ja" xmlns="http://www.w3.org/1999/xhtml" 
     xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
@@ -15,12 +16,24 @@
 </head>
 
 <body>
+	<!-- layouts/layout.html のhasMessageがtrueなら下部のscriptで指定した時間message表示 -->
 	<div th:if="${hasMessage}" class="alert alert-dismissible fade show" th:classappend="${class}" role='alert'>
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><span
 			th:text="${message}"></span>
 	</div>
+	<!-- layouts/layout.html のlayouts/common :: nav にリプレイス部 が次行 -->
 	<nav layout:replace="~{layouts/common :: nav}"></nav>
+	<!-- layouts/layout.html のlayout:fragment="contents" のデコレーション部 が次行 -->
 	<div layout:fragment="contents"></div>
+	<!-- layouts/layout.html のscriptタグ が以下続く 
+	     type属性:組み込むデータ形式を指定する。type属性を記述しなければ初期値のJavaScriptになる。
+	     JavaScriptは直接記述するか、src="sample.js"のように外部スクリプトファイルのURIを指定する。
+	     integrity属性:サブリソース整合性チェックで使用される整合性メタデータを指定。ContentDeliveryNetwork
+	     などから取得した外部スクリプトに改竄が加えられていないか確認するために
+	     URIから取得したスクリプトのハッシュ値と、属性に指定したハッシュ値が一致するか確認する。
+	     一致した時のみスクリプトを実行することで、クロスサイトスクリプティングなどのインジェクション攻撃を回避する。
+	     crossorigin属性:要素がクロスオリジンリクエストを処理する方法を指定。anonymousを指定すると
+	     ユーザー資格情報を送信せずにスクリプトを実行する。-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 		crossorigin="anonymous"></script>

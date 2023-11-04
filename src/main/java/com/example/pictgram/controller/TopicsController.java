@@ -40,6 +40,8 @@ import com.example.pictgram.form.UserForm;
 import com.example.pictgram.repository.TopicRepository;
 import com.example.pictgram.entity.Favorite;
 import com.example.pictgram.form.FavoriteForm;
+import com.example.pictgram.entity.Comment;
+import com.example.pictgram.form.CommentForm;
 
 import java.util.Locale;
 import org.springframework.context.MessageSource;
@@ -90,12 +92,14 @@ public class TopicsController {
 	//TopicをTopicFormにマッピングするメソッド
 	//①imageData②UserForm user,
 	//③List<FavoriteForm> favorites, ④FavoriteForm favorite
+	//⑤List<CommentForm> comments,
 	//はそれぞれModelMapper以外でマッピングを行う。
-	//引数のUserInfは④でログインuserIdとTopicの
+	//引数のUserInfは④でログインuserIdとTopic entityのList<Favorite> のuserIdが等しいか確認時に使用
 	public TopicForm getTopic(UserInf user, Topic entity) throws FileNotFoundException, IOException {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.typeMap(Topic.class, TopicForm.class).addMappings(mapper -> mapper.skip(TopicForm::setUser));
 		modelMapper.typeMap(Topic.class, TopicForm.class).addMappings(mapper -> mapper.skip(TopicForm::setFavorites));
+		modelMapper.typeMap(Topic.class, TopicForm.class).addMappings(mapper -> mapper.skip(TopicForm::setComments));
 		modelMapper.typeMap(Favorite.class, FavoriteForm.class).addMappings(mapper -> mapper.skip(FavoriteForm::setTopic));
 		
 		boolean isImageLocal = false;
@@ -105,8 +109,8 @@ public class TopicsController {
 		TopicForm form = modelMapper.map(entity, TopicForm.class);  //なぜここでTopicFormのuserがコピーされる？
 		
 		//①Topic entityのpathを元にイメージデータを読み込み、TopicForm formのimageDataに格納
-		//動作:pathからInputStreamで配列indataに書き込みByteArrayOutputStream osに格納
-		//     StringBuilder dataに追加情報とosを格納し、TopicForm formのimageDataに格納
+		//動作:pathからInputStreamで配列indataに画像データを書き込みByteArrayOutputStream osに格納
+		//     StringBuilder dataに画像の追加情報とosを格納し、TopicForm formのimageDataに格納
 		if (isImageLocal) {
 			try (InputStream is = new FileInputStream(new File(entity.getPath()));
 					ByteArrayOutputStream os = new ByteArrayOutputStream()) {
@@ -143,6 +147,15 @@ public class TopicsController {
 			}
 		}
 		form.setFavorites(favorites);
+		
+		//⑤Topic entityのList<Comment> commentsを、TopicForm formのList<CommentForm> commentsにコピー
+		List<CommentForm> comments = new ArrayList<CommentForm>();
+		for (Comment commentEntity : entity.getComments()) {
+			CommentForm comment = modelMapper.map(commentEntity, CommentForm.class);
+			comments.add(comment);
+		}
+		form.setComments(comments);
+		
 		System.out.println("テストコメント トピックコントローラ TopicをTopicFormに変換");
 		return form;
 	}

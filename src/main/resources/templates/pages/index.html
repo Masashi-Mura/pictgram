@@ -1,32 +1,38 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layouts/layout}">
-  <head>
-    <title>Pictgram</title>
-  </head>
-  <body>
-<div class="pages-index-wrapper text-center" layout:fragment="contents">
-  <div class="container">
-    <div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
-    <h1 class="text-white" th:text="#{pages.index.lead.1}">Make you Happy</h1>
-    <h2 class="text-white" th:text="#{pages.index.lead.2}">Pictgram is a service that you can post photos.</h2>
-    <div class="d-none d-lg-block d-xl-block d-xxl-block">
-    <div class="row justify-content-center">
-      <div class="col-3">
-        <a class="btn w-100 btn-outline-light" href="/users/new" th:text="#{pages.index.signup}">Sign up</a>
-      </div>
-      <div class="col-3">
-        <a class="btn w-100 btn-outline-light" href="/login" th:text="#{pages.index.login}">Log in</a>
-      </div>
-    </div>
-    </div>
-    <div class="d-block d-lg-none d-xl-none d-xxl-none">
-      <a class="btn w-100 btn-outline-light mb-3" href="/users/new" th:text="#{pages.index.signup}">Sign up</a>
-      <a class="btn w-100 btn-outline-light" href="/login" th:text="#{pages.index.loguin}">Log in</a>
-    </div>
-  </div>
-</div>
-  </body>
+<!-- pages/index.html -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Pictgram</title>
+</head>
+
+<body>
+	<!-- ここからデコレーション記述 -->
+	<div class="pages-index-wrapper text-center" layout:fragment="contents">
+		<!-- pages/index.html のデコレーション-->
+		<div class="container">
+			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+			<h1 class="text-white" th:text="#{pages.index.lead.1}">Make you Happy</h1>
+			<h2 class="text-white" th:text="#{pages.index.lead.2}">Pictgram is a service that you can post photos.</h2>
+			<div class="d-none d-lg-block d-xl-block d-xxl-block">
+				<div class="row justify-content-center">
+					<div class="col-3">
+						<a class="btn w-100 btn-outline-light" href="/users/new" th:text="#{pages.index.signup}">Sign
+							up</a>
+					</div>
+					<div class="col-3">
+						<a class="btn w-100 btn-outline-light" href="/login" th:text="#{pages.index.login}">Log in</a>
+					</div>
+				</div>
+			</div>
+			<div class="d-block d-lg-none d-xl-none d-xxl-none">
+				<a class="btn w-100 btn-outline-light mb-3" href="/users/new" th:text="#{pages.index.signup}">Sign
+					up</a>
+				<a class="btn w-100 btn-outline-light" href="/login" th:text="#{pages.index.loguin}">Log in</a>
+			</div>
+		</div>
+	</div>
+</body>
+
 </html>

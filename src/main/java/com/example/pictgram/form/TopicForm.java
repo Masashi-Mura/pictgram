@@ -23,9 +23,9 @@ public class TopicForm {
 	//formから受け取り時のみ使用
 	@ImageNotEmpty
 	@ImageByte(max = 2000000)
-	private MultipartFile image;
+	private MultipartFile image;	//TopicFormのみのフィールド
 	
-	private String imageData;
+	private String imageData;		//TopicFormのみのフィールド
 	private String path;
 	
 	@NotEmpty
@@ -36,5 +36,7 @@ public class TopicForm {
 	
 	private List<FavoriteForm> favorites;
 	
-	private FavoriteForm favorite;
+	private FavoriteForm favorite;	//TopicFormのみのフィールド
+	
+	private List<CommentForm> comments;
 }

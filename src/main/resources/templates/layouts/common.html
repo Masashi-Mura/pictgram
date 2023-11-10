@@ -5,6 +5,7 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg fixed-top navbar-dark" layout:fragment="nav">
+		<!-- ここからreplaceのnav開始 -->
 		<div class="container">
 			<a class="navbar-brand" th:href="@{/topics}">
 
@@ -16,7 +17,13 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
+					<!-- ログイン時のナビゲーション -->
 					<th:block sec:authorize="isAuthenticated()">
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/calendars}">
+								<img src="/images/icons/calendar.png" th:src="@{/images/icons/calendar.png}">
+							</a>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/favorites}">
 								<img src="/images/icons/heart.png" th:src="@{/images/icons/heart.png}">
@@ -34,6 +41,7 @@
 							</a>
 						</li>
 					</th:block>
+					<!-- 未ログイン時のナビゲーション -->
 					<th:block sec:authorize="!isAuthenticated()">
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/users/new}">
@@ -49,13 +57,14 @@
 				</ul>
 			</div>
 		</div>
+		<!-- replaceのnavはここまで -->
 	</nav>
 	<!-- layouts/common のlayout:fragment="messages"部が別htmlのlayout:replace="~{layouts/common::messages}に代入される。次行から -->
 	<div id="messages" layout:fragment="messages" th:if="!${#lists.isEmpty(#fields.detailedErrors())}">
 		<ul>
 			<li th:each="error : ${#fields.detailedErrors()}" class="error-message" th:text="${error.message}" />
 		</ul>
-	<!-- layouts/common のlayout:fragment="messages"部はここまで -->
+		<!-- layouts/common のlayout:fragment="messages"部はここまで -->
 	</div>
 </body>
 

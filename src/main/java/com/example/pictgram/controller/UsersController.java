@@ -66,6 +66,7 @@ public class UsersController {
 			return "users/new";
 		}
 
+		//フォームデータにエラーが無ければDBに保存し、登録完了メッセージをlayouts/completeに返す。
 		User entity = new User(email, name, passwordEncoder.encode(password), Authority.ROLE_USER);
 		repository.saveAndFlush(entity);
 

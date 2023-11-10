@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- calendars/index -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Pictgram</title>
+</head>
+
+<body>
+	<div layout:fragment="contents">
+		<div id='calendar'></div>
+		<link href="" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var calendarEl = document.getElementById('calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth',
+					//言語設定：日本語
+					locale: 'ja',
+					//イベント情報をコントローラからJson形式で取得
+					events: {url: '/events/all'}
+				});
+				calendar.render();
+			});
+		</script>
+	</div>
+</body>
+
+</html>

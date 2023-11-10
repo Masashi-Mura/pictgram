@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <!-- layouts/layout.html -->
-<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
@@ -38,7 +37,20 @@
 		integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 		crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/scripts/method-convert.js" th:src="@{/scripts/method-convert.js}"></script>
+	<script src="/scripts/method-convert.js" th:src="@{/scripts/method-convert.js}"></script>
+
+	<!-- 通知メッセージOneSignalの設定 (appIdは環境変数を使用)-->
+	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+	<script th:inline="javascript">
+		window.OneSignalDeferred = window.OneSignalDeferred || [];
+		OneSignalDeferred.push(function (OneSignal) {
+			OneSignal.init({
+				appId: /*[[${@environment.getProperty('onesignal.id')}]]*/,
+			});
+		});
+	</script>
+
+	<!-- alertクラスをフェードアウトさせる時間の設定 -->
 	<script>
 		$(function () {
 			convertMethod('.convert');

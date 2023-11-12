@@ -32,7 +32,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.context.Context;
 
+import com.example.pictgram.service.SendMailService;
 import com.example.pictgram.entity.Topic;
 import com.example.pictgram.entity.UserInf;
 import com.example.pictgram.form.TopicForm;
@@ -66,6 +68,9 @@ public class TopicsController {
 	
 	@Value("${image.local:false}")
 	private String imageLocal;
+	
+	@Autowired
+	private SendMailService sendMailService;
 
 //以下、トピック一覧表示関係
 	//ログイン、投稿、お気に入り操作後の画面
@@ -231,7 +236,13 @@ public class TopicsController {
 		redirAttrs.addFlashAttribute("class", "alert-info");
 		//メッセージ：投稿に成功しました
 		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
-		System.out.println("テストコメント トピックコントローラ 画像保存とTopicテーブルにレコード追加");
+		//投稿メールを管理者に送信
+		Context context = new Context();
+		context.setVariable("title", "【Pictgram】新規投稿");
+		context.setVariable("name", user.getUsername());
+		context.setVariable("description", entity.getDescription());
+		sendMailService.sendMail(context);		
+		System.out.println("テストコメント トピックコントローラ 画像保存,Topicテーブルに保存,管理者にメール送付");
 		return "redirect:/topics";
 	}
 	

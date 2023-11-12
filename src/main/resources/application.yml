@@ -23,5 +23,21 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
       
+  mail:
+    default-encoding: UTF-8
+    protocol: smtp
+    host: smtp.gmail.com
+    port: 587
+#    username: 環境変数
+#    password: 環境変数
+    properties: 
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  thymeleaf:
+    check-template-location: false
+      
 image:
   local: true

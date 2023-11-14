@@ -61,6 +61,14 @@ import org.apache.sanselan.common.IImageMetadata;
 import org.apache.sanselan.formats.jpeg.JpegImageMetadata;
 import org.apache.sanselan.formats.tiff.TiffImageMetadata.GPSInfo;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+import java.lang.reflect.Type;
+import org.modelmapper.TypeToken;
+import org.springframework.http.MediaType;
+import com.example.pictgram.bean.TopicCsv;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+
 @Controller
 public class TopicsController {
 
@@ -334,5 +342,23 @@ public class TopicsController {
 		} catch (ImageReadException | IOException e) {
 			log.warn(e.getMessage(), e);
 		}
+	}
+
+	//以下csv出力機能関係
+	//オクテットストリームで、UTF-8の文字エンコーディング、レスポンスをダウンロードとして指定。
+	@RequestMapping(value = "/topics/topic.csv", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+			+ "; charset=UTF-8; Content-Disposition: attachment")
+	//TopicCsvデータの文字列をそのまま返す。
+	@ResponseBody
+	public Object downloadCsv() throws IOException {
+		Iterable<Topic> topics = repository.findAll();
+		Type listType = new TypeToken<List<TopicCsv>>() {
+		}.getType();
+		//topicsをList<TopicCsv>に変換
+		List<TopicCsv> csv = modelMapper.map(topics, listType);
+		CsvMapper mapper = new CsvMapper();
+		CsvSchema schema = mapper.schemaFor(TopicCsv.class).withHeader();
+		//配列のインスタンスcsvをschemaを使用してcsv形式の文字列に変換
+		return mapper.writer(schema).writeValueAsString(csv);
 	}
 }

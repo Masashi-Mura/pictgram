@@ -35,11 +35,17 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a th:href="@{/logout}" class="nav-link convert" data-method="post"
+							<a class="nav-link" th:href="@{/settings}" >
+								<img src="/images/icons/setting.png" th:src="@{/images/icons/setting.png}">
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link convert" th:href="@{/logout}" data-method="post"
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/logout.png" th:src="@{/images/icons/logout.png}">
 							</a>
 						</li>
+
 					</th:block>
 					<!-- 未ログイン時のナビゲーション -->
 					<th:block sec:authorize="!isAuthenticated()">

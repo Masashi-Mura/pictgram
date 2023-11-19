@@ -110,7 +110,6 @@ public class TopicsController {
 			list.add(form);
 		}
 		model.addAttribute("list", list);
-		System.out.println("テストコメント トピックコントローラ トピック一覧をlistで返す");
 		return "topics/index";
 	}
 
@@ -182,7 +181,6 @@ public class TopicsController {
 		}
 		form.setComments(comments);
 
-		System.out.println("テストコメント トピックコントローラ TopicをTopicFormに変換");
 		return form;
 	}
 
@@ -201,7 +199,6 @@ public class TopicsController {
 			mimeType += "gif";
 			break;
 		}
-		System.out.println("テストコメント トピックコントローラ getMimeTypeメソッド");
 		return mimeType;
 	}
 
@@ -210,7 +207,6 @@ public class TopicsController {
 	@GetMapping(path = "/topics/new")
 	public String newTopic(Model model) {
 		model.addAttribute("form", new TopicForm());
-		System.out.println("テストコメント トピックコントローラ TopicFormをViewに共有");
 		return "topics/new";
 	}
 
@@ -226,7 +222,6 @@ public class TopicsController {
 			model.addAttribute("class", "alert-danger");
 			//メッセージ：投稿に失敗しました。
 			model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", new String[] {}, locale));
-			System.out.println("テストコメント トピックコントローラ 画像保存失敗");
 			return "topics/new";
 		}
 
@@ -234,7 +229,6 @@ public class TopicsController {
 		boolean isImageLocal = false;
 		if (imageLocal != null) {
 			isImageLocal = Boolean.parseBoolean(imageLocal);
-			System.out.println("テストコメント トピックコントローラ 画像保存設定の読み込み");
 		}
 
 		//画像を保存し、DBのテーブルTopicにuserId,保存先のパス,Description,緯度経度等を保存
@@ -265,7 +259,6 @@ public class TopicsController {
 		context.setVariable("name", user.getUsername());
 		context.setVariable("description", entity.getDescription());
 		sendMailService.sendMail(context);
-		System.out.println("テストコメント トピックコントローラ 画像保存,Topicテーブルに保存,管理者にメール送付");
 		return "redirect:/topics";
 	}
 
@@ -285,7 +278,6 @@ public class TopicsController {
 		image.transferTo(destFile);
 
 		setGeoInfo(entity, destFile, image.getOriginalFilename());
-		System.out.println("テストコメント トピックコントローラ 画像保存と保存先パスを返すメソッド");
 		return destFile;
 
 	}

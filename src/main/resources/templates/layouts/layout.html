@@ -6,11 +6,17 @@
 
 <head>
 	<meta charset="UTF-8">
+	<!-- 画面の横幅をデバイスのサイズに合わせる -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- bootstrap読み込み CDN利用 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<!-- bootstrapアイコン読み込み CDN利用 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+	<!-- cssファイル読み込み style.scssから作成 -->
 	<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+	<!-- cssファイル読み込み bootstrap-social -->
+	<link rel="stylesheet" href="/css/bootstrap-social.css" th:href="@{/css/bootstrap-social.css}">
 	<title>Pictgram</title>
 </head>
 
@@ -25,6 +31,7 @@
 	<!-- layouts/layout.html のlayout:fragment="contents" のデコレーション部 が次行 -->
 	<div layout:fragment="contents"></div>
 	<!-- layouts/layout.html のscriptタグ が以下続く 
+		   殆どはBootstrap等の技術を使うために公式が提供しているコードである。
 	     type属性:組み込むデータ形式を指定する。記述しなければ初期値のtype="text/javascript"が自動適用される。
 	     JavaScriptは直接記述するか、src="sample.js"のように外部スクリプトファイルのURIを指定する。
 	     integrity属性:サブリソース整合性チェックで使用される整合性メタデータを指定。ContentDeliveryNetwork
@@ -33,9 +40,11 @@
 	     一致した時のみスクリプトを実行することで、クロスサイトスクリプティングなどのインジェクション攻撃を回避する。
 	     crossorigin属性:要素がクロスオリジンリクエストを処理する方法を指定。anonymousを指定すると
 	     ユーザー資格情報を送信せずにスクリプトを実行する。-->
+	<!-- bootstrapの読み込み -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 		crossorigin="anonymous"></script>
+	<!-- jqueryの読み込み 注:jqueryを利用したスクリプトは読み込みより後に記述-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="/scripts/method-convert.js" th:src="@{/scripts/method-convert.js}"></script>
 

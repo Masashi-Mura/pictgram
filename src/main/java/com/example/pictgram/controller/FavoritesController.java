@@ -57,7 +57,8 @@ public class FavoritesController {
 			list.add(form);
 		}
 		model.addAttribute("list", list);
-        System.out.println("テストコメント フェバリットコントローラGET /favorites→topics/index");
+		//広告表示設定
+		model.addAttribute("hasFooter", true);
 		return "topics/index";
 	}
 	

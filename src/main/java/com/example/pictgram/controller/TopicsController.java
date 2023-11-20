@@ -110,6 +110,8 @@ public class TopicsController {
 			list.add(form);
 		}
 		model.addAttribute("list", list);
+		//広告表示設定
+		model.addAttribute("hasFooter", true);
 		return "topics/index";
 	}
 

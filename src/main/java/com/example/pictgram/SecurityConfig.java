@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private FormAuthenticationProvider authenticationProvider;
 
 	private static final String[] URLS = { "/css/**", "/images/**", "/scripts/**", "/h2-console/**", "/favicon.ico",
-			"//OneSignalSDKWorker.js" };
+			"/OneSignalSDKWorker.js" };
 
 	/**
 	* 認証から除外する
